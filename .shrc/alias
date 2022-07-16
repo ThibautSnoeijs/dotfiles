@@ -1,0 +1,9 @@
+alias uncomment='sed "s/\s*#.*//g; /^$/ d"'
+for L in $(uncomment ~/.shrc/aliases/color)
+	do alias $L="$L --color=auto";done
+for L in $(uncomment ~/.shrc/aliases/w3m)
+	do alias $(echo $L |awk -F= '{print $1}')="w3m $(echo $L |awk -F= '{print $2}')";done
+for L in $(uncomment ~/.shrc/aliases/flatpak)
+	do alias $(echo $L |awk -F= '{print $1}')="flatpak run $(echo $L |awk -F= '{print $2}')";done
+for L in $(uncomment ~/.shrc/aliases/error)
+	do alias $L="$L 2> /dev/null";done
