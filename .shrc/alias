@@ -5,5 +5,4 @@ filealias1(){ a=$@;for L in $(uncomment ~/.shrc/aliases/"$a");do alias $L="$L $a
 filealias0 w3m
 filealias0 flatpak run
 filealias1 --color=auto
-for L in $(uncomment ~/.shrc/aliases/error);do alias $L="$L 2> /dev/null";done
 
