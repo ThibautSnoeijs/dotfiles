@@ -1,4 +1,0 @@
-#!/bin/xonsh
-$PROMPT='{cwd}$ '
-$XONSH_SHOW_TRACEBACK = True
-. ~/.shrc/.alias
