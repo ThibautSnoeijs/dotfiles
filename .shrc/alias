@@ -1,5 +1,10 @@
-for a in $(ls ~/.shrc/aliases/defaults);do
+IFS=$'\n'
+for a in $(ls -1 ~/.shrc/aliases/defaults);do
 	for L in $(sed "s/\s*#.*//g; /^$/ d" ~/.shrc/aliases/defaults/"$a");do 
 		alias $L="$L $a"
 	done
 done
+for L in $(sed "s/\s*#.*//g; /^$/ d" ~/.shrc/aliases/other);do 
+	alias $(echo $L |cut -d'=' -f 1 )="$(echo $L |cut -d'=' -f 2- )"
+done
+unset IFS
