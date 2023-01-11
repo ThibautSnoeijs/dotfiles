@@ -1,0 +1,4 @@
+# For package managers that use the same flags as pacman
+xi
+xbps-install
+pacman
