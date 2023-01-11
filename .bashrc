@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=$PATH:$HOMEDIR/bin
+export PATH=$PATH:$HOMEDIR/.local/bin
 [[ $- != *i* ]] && return
 HISTCONTROL=ignoreboth
 shopt -s histappend
