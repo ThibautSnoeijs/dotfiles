@@ -8,3 +8,6 @@ shrcdir=~/.shrc/
 for shrcfile in $(ls -p $shrcdir | grep -v / | grep .sh);do
 . $shrcdir"/"$shrcfile
 done
+HISTFILESIZE=
+HISTSIZE=
+HISTTIMEFORMAT="[%F %T] "
