@@ -7,7 +7,7 @@ aliasesdir=$shrcdir/aliases
 # Example: "ls" is in "--color=auto" so an alias will be "ls=ls --color=auto"
 defaultsdir=$aliasesdir/defaults
 [[ -d "$defaultsdir" ]]&& for a in $(ls -1 "$defaultsdir");do
-	for L in $(sed "s/\s*#.*//g; /^$/ d" "$defaultsdir/$a");do 
+	for L in $(sed "s/\s*#.*//g; /^$/ d" "$defaultsdir/$a");do
 		alias $L="$L $a"
 	done
 done
@@ -26,5 +26,4 @@ unset dodir
 unset IFS
 unset aliasesdir
 
-# Put other aliases here
-alias boottime='cowsay $( echo boottime is && sudo dmesg | grep "New seat" | cut -d"]" -f 1 | rev | cut -d" " -f 1 | rev && echo seconds ) | lolcat'
+alias cls="clear"

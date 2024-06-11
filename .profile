@@ -17,12 +17,12 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
+if [ -d "$HOME/bin" ]; then
     export PATH="$HOME/bin:$PATH"
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
+if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
@@ -32,3 +32,7 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 fi
 
 export QT_QPA_PLATFORMTHEME=qt5ct
+
+if [ -z $DISPLAY ]&&[ $(tty) = /dev/tty1 ]; then
+    sway --unsupported-gpu
+fi
