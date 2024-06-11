@@ -14,13 +14,11 @@ set $volume_up pamixer -u -i
 set $volume_down pamixer -d
 set $toggle_mute pamixer -t
 #set $volume_changed_sound paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
-# Themes
-set $gnome_schema org.gnome.desktop.interface
-set $gtk_theme Breeze-Dark
-set $icon_theme KanadaIcons
-set $cursor_theme KDE_Classic
-set $cursor_size 24
-set $font_name Noto Sans, 13
+set $browser firefox --new-tab
+set $mail https://outlook.live.com
+# Displays
+set $maindisplay 'Philips Consumer Electronics Company PHL 275E1 0x00004C40'
+set $secondarydislpay 'Hewlett Packard hp f1523 CNN4031L9J'
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -30,6 +28,14 @@ for_window [app_id="xfce4-appfinder"] floating enable
 
 include /etc/sway/config-vars.d/*
 include /etc/sway/config.d/*
+
+# Themes
+set $gnome_schema org.gnome.desktop.interface
+set $gtk_theme Breeze-Dark
+set $icon_theme KanadaIcons
+set $cursor_theme Bibata-Original-Classic
+set $cursor_size 20
+set $font_name IosevkaTerm Nerd Font, 13
 
 ### Theming and Output configuration
 #
@@ -49,12 +55,28 @@ seat * xcursor_theme $cursor_theme $cursor_size
 #
 # Output configuration
 #
-output * bg ~/Pictures/wallpapers/frameworkwallpaper0.jpeg fill
-output * scale 1
-output eDP-1 {
-	mode 2256x1504@59.999Hz
+output * {
+	bg ~/Pictures/Backgrounds/6346274.png fill
 	scale 1
+	adaptive_sync on
+	render_bit_depth 10
+	
 }
+output 'Philips Consumer Electronics Company PHL 275E1 0x00004C40' {
+	mode 2560x1440@75Hz
+	pos 0,0
+}
+output 'Hewlett Packard hp f1523 CNN4031L9J' {
+	mode 1024x768@75Hz
+	pos 2560,672
+}
+workspace 1 output $maindisplay
+workspace 2 output $maindisplay
+workspace 3 output $maindisplay
+workspace 4 output $secondarydislpay
+workspace 5 output $secondarydislpay
+workspace 6 output $secondarydislpay
+
 #
 # Swaybar
 #
@@ -62,10 +84,10 @@ bar swaybar_command waybar
 
 ### Autostart applications
 #
-exec_always {
-	pgrep -l steam   || steam -silent %u
-	pgrep -l vesktop || flatpak run dev.vencord.Vesktop --start-minimized
-	pgrep -l foot    || foot --server
+exec {
+	nheko
+	flatpak run dev.vencord.Vesktop --start-minimized
+	foot --server
 }
 ### Idle configuration
 #
@@ -256,5 +278,14 @@ bindsym $mod+r mode "resize"
 	bindsym XF86MonBrightnessUp   exec "sudo light -A 1; sudo framework_tool --kblight $(( $maxkeyboardbrightness - $(light -G | cut -d"." -f1)*($maxkeyboardbrightness-1)/100 ))"
 	bindsym XF86MonBrightnessDown exec "sudo light -U 1; sudo framework_tool --kblight $(( $maxkeyboardbrightness - $(light -G | cut -d"." -f1)*($maxkeyboardbrightness-1)/100 ))"
 
+	# Display layout stuff
 	bindsym Mod4+p exec wdisplays 
 	for_window [app_id="wdisplays"] floating enable
+
+	# Browser
+	bindsym XF86HomePage exec $browser
+	bindsym XF86Mail     exec $browser $mail
+
+	# Menu
+	bindsym XF86Search exec $menu
+
