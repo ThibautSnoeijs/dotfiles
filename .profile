@@ -33,6 +33,8 @@ fi
 
 export QT_QPA_PLATFORMTHEME=qt5ct
 
+export WLR_NO_HARDWARE_CURSORS=1
+
 if [ -z $DISPLAY ]&&[ $(tty) = /dev/tty1 ]; then
     sway --unsupported-gpu
 fi
