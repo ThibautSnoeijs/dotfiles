@@ -1,10 +1,15 @@
 #!/bin/sh
-IFS=$'\n'
+IFS=$'
+'
+echo Pulling git
 git pull
+echo Finding difs
+diffcommand="diff -rewB"
 echo Updating home from git repo
-for i in $(diff -q -r ./ ~ | awk '{ if ($1 != "Only") {print $2, $4} }'); do bash -c "diff -y $i; cp -i $i"; done
+difs=$(bash -c "$diffcommand ./ ~" | grep -P "^\Q$diffcommand" | sed "s/$diffcommand //")
+for files in $difs; do bash -c "echo $files; diff -y $files; cp -i $files"; done
 echo Updating git repo from home
-for i in $(diff -q -r ./ ~ | awk '{ if ($1 != "Only") {print $4, $2} }'); do bash -c "diff -y $i; cp -i $i"; done
+for files in $(echo $difs | awk '{print $2, $1}'); do bash -c "echo $files; diff -y $files; cp -i $files"; done
 git add --all .
 git commit
 git push

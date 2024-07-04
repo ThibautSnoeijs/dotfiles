@@ -70,12 +70,6 @@ output 'Hewlett Packard hp f1523 CNN4031L9J' {
 	mode 1024x768@75Hz
 	pos 2560,672
 }
-workspace 1 output $maindisplay
-workspace 2 output $maindisplay
-workspace 3 output $maindisplay
-workspace 4 output $secondarydislpay
-workspace 5 output $secondarydislpay
-workspace 6 output $secondarydislpay
 
 #
 # Swaybar
@@ -85,9 +79,10 @@ bar swaybar_command waybar
 ### Autostart applications
 #
 exec {
-	nheko
-	flatpak run dev.vencord.Vesktop --start-minimized
 	foot --server
+	nheko
+	steam -silent
+	flatpak run dev.vencord.Vesktop --start-minimized
 }
 ### Idle configuration
 #
