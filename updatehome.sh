@@ -3,7 +3,7 @@
 OLDIFS=$IFS
 IFS=$'
 '
-diffcommand="diff -rewB"
+diffcommand="diff -rwB"
 
 updatedifs() {
 difs=$(bash -c "$diffcommand $@" | grep -P "^\Q$diffcommand" | sed "s/$diffcommand //")
