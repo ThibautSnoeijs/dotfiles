@@ -3,11 +3,20 @@
 OLDIFS=$IFS
 IFS=$'
 '
+
 diffcommand="diff -rwB"
 
 updatedifs() {
-difs=$(bash -c "$diffcommand $@" | grep -P "^\Q$diffcommand" | sed "s/$diffcommand //")
-for files in $difs; do bash -c "echo $files; diff -yd $files; cp -i $files"; done
+	for files in $(
+			bash -c "$diffcommand $@" |
+			grep -P "^\Q$diffcommand" |
+			sed "s/$diffcommand //"
+		)
+		do bash -c "
+			echo $files;
+			diff -yd $files;
+			cp -i $files"
+		 done
 }
 
 echo Pulling git
