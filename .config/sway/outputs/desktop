@@ -1,0 +1,15 @@
+output * {
+	bg ~/Pictures/Backgrounds/6346274.png fill
+	scale 1
+	adaptive_sync on
+	render_bit_depth 10
+	
+}
+output 'Philips Consumer Electronics Company PHL 275E1 0x00004C40' {
+	mode 2560x1440@75Hz
+	pos 0,0
+}
+output 'Hewlett Packard hp f1523 CNN4031L9J' {
+	mode 1024x768@75Hz
+	pos 2560,672
+}
