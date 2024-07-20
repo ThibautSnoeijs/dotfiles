@@ -1,0 +1,16 @@
+set $gnome_schema org.gnome.desktop.interface
+set $gtk_theme Breeze-Dark
+set $icon_theme KanadaIcons
+set $cursor_theme Bibata-Original-Classic
+set $cursor_size 20
+set $font_name IosevkaTerm Nerd Font, 13
+
+exec_always {
+        gsettings set "$gnome_schema" gtk-theme "$gtk_theme"
+        gsettings set "$gnome_schema" icon-theme "$icon_theme"
+        gsettings set "$gnome_schema" cursor-theme "$cursor_theme"
+        gsettings set "$gnome_schema" cursor-size "$cursor_size"
+        gsettings set "$gnome_schema" font-name "$font_name"
+}
+
+seat * xcursor_theme $cursor_theme $cursor_size

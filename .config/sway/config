@@ -9,16 +9,7 @@ set $up l
 set $right semicolon
 # Your preferred terminal emulator
 set $term footclient
-# Audio controll commands
-set $volume_up pamixer -u -i
-set $volume_down pamixer -d
-set $toggle_mute pamixer -t
-#set $volume_changed_sound paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
-set $browser firefox --new-tab
-set $mail https://outlook.live.com
 # Displays
-set $maindisplay 'Philips Consumer Electronics Company PHL 275E1 0x00004C40'
-set $secondarydislpay 'Hewlett Packard hp f1523 CNN4031L9J'
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -29,47 +20,15 @@ for_window [app_id="xfce4-appfinder"] floating enable
 include /etc/sway/config-vars.d/*
 include /etc/sway/config.d/*
 
-# Themes
-set $gnome_schema org.gnome.desktop.interface
-set $gtk_theme Breeze-Dark
-set $icon_theme KanadaIcons
-set $cursor_theme Bibata-Original-Classic
-set $cursor_size 20
-set $font_name IosevkaTerm Nerd Font, 13
-
 ### Theming and Output configuration
-#
-# GTK theme
-#
-exec_always {
-	gsettings set "$gnome_schema" gtk-theme "$gtk_theme"
-	gsettings set "$gnome_schema" icon-theme "$icon_theme"
-	gsettings set "$gnome_schema" cursor-theme "$cursor_theme"
-	gsettings set "$gnome_schema" cursor-size "$cursor_size"
-	gsettings set "$gnome_schema" font-name "$font_name"
-}
-#
-# Seat configuration
-#
-seat * xcursor_theme $cursor_theme $cursor_size
+
+include ~/.config/sway/themes
+
 #
 # Output configuration
 #
-output * {
-	bg ~/Pictures/Backgrounds/6346274.png fill
-	scale 1
-	adaptive_sync on
-	render_bit_depth 10
-	
-}
-output 'Philips Consumer Electronics Company PHL 275E1 0x00004C40' {
-	mode 2560x1440@75Hz
-	pos 0,0
-}
-output 'Hewlett Packard hp f1523 CNN4031L9J' {
-	mode 1024x768@75Hz
-	pos 2560,672
-}
+include ~/.config/sway/outputs/*
+include ~/.config/sway/keybinds/*
 
 #
 # Swaybar
@@ -83,6 +42,7 @@ exec {
 	nheko
 	steam -silent
 	flatpak run dev.vencord.Vesktop --start-minimized
+	light -I
 }
 ### Idle configuration
 #
@@ -99,7 +59,7 @@ exec {
 
 ### Input configuration
 #
-input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
+input * {
 	tap enabled
 	natural_scroll disabled
 }
@@ -243,44 +203,3 @@ mode "resize" {
 	bindsym q      mode "default"
 }
 bindsym $mod+r mode "resize"
-#
-# Media keys:
-#
-	# Variables for audio stuffs
-	# Change volume by 5 normally
-	bindsym XF86AudioRaiseVolume exec "$volume_up   5 && $volume_changed_sound"
-	bindsym XF86AudioLowerVolume exec "$volume_down 5 && $volume_changed_sound"
-	bindsym XF86AudioMute        exec "$toggle_mute   && $volume_changed_sound"
-	# Change volume by 1 when shift is also pressed
-	bindsym Shift+XF86AudioRaiseVolume exec "$volume_up   1 && $volume_changed_sound"
-	bindsym Shift+XF86AudioLowerVolume exec "$volume_down 1 && $volume_changed_sound"
-
-	# Playerctl stuff
-	bindsym XF86AudioPlay exec playerctl play-pause
-	bindsym XF86AudioNext exec playerctl next
-	bindsym XF86AudioPrev exec playerctl previous
-
-	# Screenshot stuff
-	bindsym Print       exec grimshot savecopy anything
-	bindsym Print+Alt   exec grimshot savecopy area
-	bindsym Print+Mod4  exec grimshot savecopy active
-	bindsym Print+Shift exec grimshot savecopy screen
-	bindsym Print+Ctrl  exec grimshot savecopy window
-
-	# Brightness stuff
-	exec sudo light -I
-	set $maxkeyboardbrightness 30
-	bindsym XF86MonBrightnessUp   exec "sudo light -A 1; sudo framework_tool --kblight $(( $maxkeyboardbrightness - $(light -G | cut -d"." -f1)*($maxkeyboardbrightness-1)/100 ))"
-	bindsym XF86MonBrightnessDown exec "sudo light -U 1; sudo framework_tool --kblight $(( $maxkeyboardbrightness - $(light -G | cut -d"." -f1)*($maxkeyboardbrightness-1)/100 ))"
-
-	# Display layout stuff
-	bindsym Mod4+p exec wdisplays 
-	for_window [app_id="wdisplays"] floating enable
-
-	# Browser
-	bindsym XF86HomePage exec $browser
-	bindsym XF86Mail     exec $browser $mail
-
-	# Menu
-	bindsym XF86Search exec $menu
-

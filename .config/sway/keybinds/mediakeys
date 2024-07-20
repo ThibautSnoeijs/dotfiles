@@ -1,0 +1,50 @@
+set {
+	$volume_up pamixer -u -i
+	$volume_down pamixer -d
+	$toggle_mute pamixer -t
+	$volume_changed_sound paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
+	$browser firefox --new-tab
+	$mail $browser https://outlook.live.com
+	$setkeyboardbrightness sudo framework_tool --kblight $(( 30 - $(light -G | cut -d"." -f1)*(29)/100 ))
+}
+
+bindsym {
+	# Mute
+	XF86AudioMute	exec "$toggle_mute && $volume_changed_sound"
+	# Change volume by 5
+	XF86AudioRaiseVolume	exec "$volume_up   5 && $volume_changed_sound"
+	XF86AudioLowerVolume	exec "$volume_down 5 && $volume_changed_sound"
+	# Change volume by 1 when shift
+	Shift+XF86AudioRaiseVolume	exec "$volume_up   1 && $volume_changed_sound"
+	Shift+XF86AudioLowerVolume	exec "$volume_down 1 && $volume_changed_sound"
+
+	# Playerctl
+	XF86AudioPlay	exec playerctl play-pause
+	XF86AudioNext	exec playerctl next
+	XF86AudioPrev	exec playerctl previous
+
+	# Screenshot
+	Print	exec grimshot savecopy anything
+	Print+Alt	exec grimshot savecopy area
+	Print+Mod4	exec grimshot savecopy active
+	Print+Shift	exec grimshot savecopy screen
+	Print+Ctrl	exec grimshot savecopy window
+
+	# Browser
+	XF86HomePage	exec $browser
+	XF86Mail	exec $mail
+
+	# Menu
+	XF86Search exec $menu
+
+	# Brightness
+	XF86MonBrightnessUp	exec "light -A 1; $setkeyboardbrightness"
+	XF86MonBrightnessDown	exec "light -U 1; $setkeyboardbrightness"
+
+	# Display layout configuration
+	Mod4+p	exec wdisplays
+}
+
+for_window [app_id="wdisplays"] floating enable
+
+
