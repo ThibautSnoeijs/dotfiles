@@ -1,9 +1,9 @@
 
 include ~/.config/sway/themes
 
-#exec /usr/local/bin/swaylock \
-#	$swaylocktheme \
-#	-i $background
+exec /usr/local/bin/swaylock \
+	$swaylocktheme \
+	-i $background
 
 exec swayidle -w before-sleep "\
 	/usr/local/bin/swaylock -fS \
@@ -44,6 +44,6 @@ include {
 exec {
 	foot --server
 	nheko
-	steam -silent
+	#steam -silent
 	flatpak run dev.vencord.Vesktop --start-minimized
 }
