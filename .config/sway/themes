@@ -5,7 +5,7 @@ set {
 	$cursor_theme Bibata-Original-Classic
 	$cursor_size 20
 	$font_name IosevkaTerm Nerd Font, 13
-	$background ~/Pictures/Backgrounds/6346274.png 
+	$background ~/Pictures/Backgrounds/background.jpg
 	$swaylocktextcolor   ffc107
 	$swaylockinsidecolor 00000088
 	$swaylocktheme \
