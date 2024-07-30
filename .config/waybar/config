@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
     "modules-center": ["sway/window"],
-    "modules-right": ["tray", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "battery", "clock"],
+    "modules-right": ["tray", "idle_inhibitor", "pulseaudio", "custom/network", "network", "network#usage", "cpu", "memory", "temperature", "battery", "clock"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -81,8 +81,8 @@
         "spacing": 4
     },
     "clock": {
-        "interval": 60,
-        "format": "{:%H:%M}",
+        "interval": 1,
+        "format": "{:%H:%M:%S}",
         "format-alt": "{:%Y-%m-%d %H:%M}",
         "tooltip-format": "<big>{:%Y-%m-%d %H:%M}</big>\n<tt><small>{calendar}</small></tt>"
     },
@@ -125,12 +125,16 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%)  ",
-        "format-ethernet": "{ipaddr}/{cidr}",
+        "format-wifi": "{bandwidthTotalBytes} {essid} ({signalStrength}%)  ",
+        "format-ethernet": "{bandwidthTotalBytes} {ipaddr}/{cidr}",
         "tooltip-format": "{ifname} via {gwaddr}",
         "format-linked": "{ifname} (No IP)",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "network#usage": {
+        "interval": 1,
+        "format": "{bandwidthUpBytes}󰕒 {bandwidthDownBytes}󰇚"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -143,7 +147,7 @@
         "format-icons": {
             "headphone": " ",
             "hands-free": " ",
-            "headset": " ",
+            "headset": "󰋎 ",
             "phone": " ",
             "portable": " ",
             "car": " ",
