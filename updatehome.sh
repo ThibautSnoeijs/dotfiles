@@ -29,7 +29,7 @@ echo Updating git repo from home
 updatedifs "~ ./"
 
 git add --all .
-git commit
+git commit -m "Synced to $(hostname)"
 git push
 
 IFS=$OLDIFS
