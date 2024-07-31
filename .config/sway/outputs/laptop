@@ -1,6 +1,0 @@
-output * {
-	bg ~/Pictures/Backgrounds/framework_open.jpg fill
-	scale 1
-	adaptive_sync on
-	render_bit_depth 10
-}
