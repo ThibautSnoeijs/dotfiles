@@ -19,10 +19,10 @@ bar swaybar_command waybar
 
 set {
 	$mod Mod4
-	$left j
-	$down k
-	$up l
-	$right semicolon
+	$left h
+	$down j
+	$up k
+	$right l
 	$term footclient
 	$menu xfce4-appfinder | xargs swaymsg exec --
 }

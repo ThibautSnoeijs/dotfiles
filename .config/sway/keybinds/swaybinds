@@ -83,7 +83,6 @@
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
     bindsym $mod+b splith
-    bindsym $mod+h splith
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
