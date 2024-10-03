@@ -12,3 +12,4 @@ HISTFILESIZE=
 HISTSIZE=
 HISTFILEFORMAT="[%F %T] "
 unset MAILCHECK
+eval "$(dircolors ~/.dircolors)"
